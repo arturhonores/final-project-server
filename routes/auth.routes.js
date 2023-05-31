@@ -46,7 +46,7 @@ router.post('/registro', (req, res, next) => {
 
 router.post('/iniciar-sesion', (req, res, next) => {
 
-    console.log('secretoo', process.env.TOKEN_SECRET)
+    // console.log('secretoo', process.env.TOKEN_SECRET)
 
     const { email, password } = req.body;
 

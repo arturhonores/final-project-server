@@ -4,7 +4,7 @@ const expenseSchema = new Schema(
   {
     date: {
       type: Date,
-      required: [true, 'Date is required.'],
+      // required: [true, 'Date is required.'],
       trim: true
     },
     description: {
@@ -18,17 +18,17 @@ const expenseSchema = new Schema(
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'user is required.'],
+      // required: [true, 'user is required.'],
     },
     category: {
       type: Schema.Types.ObjectId,
       ref: 'Category',
-      required: [true, 'category is required.'],
+      // required: [true, 'category is required.'],
     },
     account: {
       type: Schema.Types.ObjectId,
       ref: 'Account',
-      required: [true, 'account is required.'],
+      // required: [true, 'account is required.'],
     }
   },
   {

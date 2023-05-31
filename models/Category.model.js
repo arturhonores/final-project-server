@@ -11,7 +11,7 @@ const categorySchema = new Schema(
         icon: {
             type: String,
             trim: true,
-            required: [true, 'icon is required.'],
+            // required: [true, 'icon is required.'],
         }
     },
     {
