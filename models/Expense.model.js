@@ -5,11 +5,10 @@ const expenseSchema = new Schema(
     date: {
       type: Date,
       // required: [true, 'Date is required.'],
-      trim: true
     },
     description: {
       type: String,
-      trim: true,
+      trim: true
     },
     amount: {
       type: Number,
@@ -18,21 +17,19 @@ const expenseSchema = new Schema(
     owner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      // required: [true, 'user is required.'],
     },
     category: {
-      type: Schema.Types.ObjectId,
-      ref: 'Category',
-      // required: [true, 'category is required.'],
-    },
-    account: {
-      type: Schema.Types.ObjectId,
-      ref: 'Account',
-      // required: [true, 'account is required.'],
+      // type: Schema.Types.ObjectId,
+      type: String,
+      enum: ["Comida", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversion", "Otros gastos"]
+      // ref: 'Category',
     }
+    // account: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: 'Account',
+    // required: [true, 'account is required.'],
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
     timestamps: true
   }
 );

@@ -6,7 +6,7 @@ router.get("/getAllExpenses", (req, res, next) => {
 
   Expense
     .find()
-    .select({ description: 1, amount: 1, owner: 1 })
+    .select({ description: 1, amount: 1, owner: 1, date: 1, category: 1 })
     .sort({ amount: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
@@ -26,11 +26,11 @@ router.get("/getOneExpense/:expense_id", (req, res, next) => {
 
 router.post("/saveExpense", verifyToken, (req, res, next) => {
 
-  const { description, amount } = req.body
+  const { description, amount, category, date } = req.body
   const { _id: owner } = req.payload
 
   Expense
-    .create({ description, amount, owner })
+    .create({ description, amount, category, date, owner })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
