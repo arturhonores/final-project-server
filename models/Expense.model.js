@@ -4,7 +4,7 @@ const expenseSchema = new Schema(
   {
     date: {
       type: Date,
-      // required: [true, 'Date is required.'],
+      required: [true, 'Date is required.'],
     },
     description: {
       type: String,
@@ -19,10 +19,9 @@ const expenseSchema = new Schema(
       ref: 'User',
     },
     category: {
-      // type: Schema.Types.ObjectId,
       type: String,
-      enum: ["Comida", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversion", "Otros gastos"]
-      // ref: 'Category',
+      enum: ["Comida", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversion", "Otros gastos"],
+      required: [true, 'category is required.'],
     }
     // account: {
     //   type: Schema.Types.ObjectId,
