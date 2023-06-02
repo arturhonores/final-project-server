@@ -19,7 +19,7 @@ router.get("/getCategory/:category", (req, res, next) => {
 
   Expense
     .find({ category: category })
-    .select({ owner: 1, category: 1, amount: 1, description: 1 })
+    .select({ owner: 1, category: 1, amount: 1, description: 1, date: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
