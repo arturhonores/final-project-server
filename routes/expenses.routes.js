@@ -3,7 +3,7 @@ const Expense = require('../models/Expense.model')
 const { verifyToken } = require("../middlewares/verifyToken.middleware")
 
 router.get("/getAllExpenses", (req, res, next) => {
-
+  // TODO: DESCOLPLAR CONTROLADORES CON VIDEO
   Expense
     .find()
     .select({ description: 1, amount: 1, owner: 1, date: 1, category: 1 })
@@ -13,12 +13,13 @@ router.get("/getAllExpenses", (req, res, next) => {
 })
 
 
-router.get("/getOneExpense/:expense_id", (req, res, next) => {
+router.get("/getCategory/:category", (req, res, next) => {
 
-  const { expense_id } = req.params
+  const category = req.params.category
 
   Expense
-    .findById(expense_id)
+    .find({ category: category })
+    .select({ owner: 1, category: 1, amount: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
