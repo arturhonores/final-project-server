@@ -44,6 +44,16 @@ router.delete("/deleteExpense/:id", verifyToken, (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.put("/editExpense/:id", verifyToken, (req, res, next) => {
+  const expenseId = req.params.id
+  const { description, amount, category, date } = req.body
+
+  Expense
+    .findByIdAndUpdate(expenseId, { description, amount, category, date }, { new: true })
+    // El parámetro { new: true } es para que mongoose devuelva el documento actualizado. Por defecto, devuelve el documento original antes de la actualización.
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
 
 router.post("/saveExpense", verifyToken, (req, res, next) => {
 
