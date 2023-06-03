@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const Expense = require('../models/Expense.model')
 const { verifyToken } = require("../middlewares/verifyToken.middleware")
-const { response } = require("express")
+// const { response } = require("express")
 
 router.get("/getAllExpenses", (req, res, next) => {
   // TODO: DESCOLPLAR CONTROLADORES CON VIDEO
@@ -31,6 +31,15 @@ router.get("/getCategory/:category", (req, res, next) => {
   Expense
     .find({ category: category })
     .select({ owner: 1, category: 1, amount: 1, description: 1, date: 1 })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
+
+router.delete("/deleteExpense/:id", verifyToken, (req, res, next) => {
+  const expenseId = req.params.id
+
+  Expense
+    .findByIdAndDelete(expenseId)
     .then(response => res.json(response))
     .catch(err => next(err))
 })
