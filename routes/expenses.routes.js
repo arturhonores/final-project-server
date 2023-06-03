@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const Expense = require('../models/Expense.model')
 const { verifyToken } = require("../middlewares/verifyToken.middleware")
+const { response } = require("express")
 
 router.get("/getAllExpenses", (req, res, next) => {
   // TODO: DESCOLPLAR CONTROLADORES CON VIDEO
@@ -8,6 +9,16 @@ router.get("/getAllExpenses", (req, res, next) => {
     .find()
     .select({ description: 1, amount: 1, owner: 1, date: 1, category: 1 })
     .sort({ amount: 1 })
+    .then(response => res.json(response))
+    .catch(err => next(err))
+})
+
+router.get("/getExpense/:id", (req, res, next) => {
+  const expenseId = req.params.id
+
+  Expense
+    .findById(expenseId)
+    .select({ description: 1, amount: 1, owner: 1, date: 1, category: 1 })
     .then(response => res.json(response))
     .catch(err => next(err))
 })
