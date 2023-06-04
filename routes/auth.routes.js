@@ -27,7 +27,14 @@ router.post('/registro', (req, res, next) => {
             const salt = bcrypt.genSaltSync(saltRounds)
             const hashedPassword = bcrypt.hashSync(password, salt)
 
-            return User.create({ email, password: hashedPassword, username, avatar })
+            //solución a avatar por defecto:
+            if (avatar) {
+                return User.create({ email, password: hashedPassword, username, avatar })
+            } else {
+                return User.create({ email, password: hashedPassword, username })
+            }
+
+            // return User.create({ email, password: hashedPassword, username, avatar })
         })
         .then((createdUser) => {
 
@@ -40,9 +47,6 @@ router.post('/registro', (req, res, next) => {
             next(err)
         })
 })
-
-
-
 
 router.post('/iniciar-sesion', (req, res, next) => {
 

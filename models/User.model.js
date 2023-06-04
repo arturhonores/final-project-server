@@ -23,6 +23,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
+      default: "https://res.cloudinary.com/di6ko4xuw/image/upload/v1685874411/user-avatar-transparent_nehwkk.png"
     },
     role: {
       type: String,
