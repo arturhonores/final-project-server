@@ -21,7 +21,7 @@ const expenseSchema = new Schema(
     },
     category: {
       type: String,
-      enum: ["Comida", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversion", "Otros gastos"],
+      enum: ["Alimentación", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversión", "Otros gastos"],
       required: [true, 'category is required.'],
     }
     // account: {

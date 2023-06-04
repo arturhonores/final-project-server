@@ -91,6 +91,49 @@ router.post('/iniciar-sesion', (req, res, next) => {
 })
 
 
+//actualizar datos del usuario
+router.put('/actualizar', verifyToken, (req, res, next) => {
+
+    console.log('Datos del usuario para actualizar: ', req.body)
+
+    // Extraer los campos que se pueden actualizar
+    const { username, password, avatar } = req.body;
+
+    // Crear un objeto para almacenar los nuevos datos del usuario
+    const updatedUser = {}
+
+    if (username) updatedUser.username = username;
+    if (avatar) updatedUser.avatar = avatar;
+
+    // Si se proporcionó una nueva contraseña, debes cifrarla antes de guardarla
+    if (password) {
+        const salt = bcrypt.genSaltSync(saltRounds)
+        const hashedPassword = bcrypt.hashSync(password, salt)
+        updatedUser.password = hashedPassword;
+    }
+
+    User
+        .findByIdAndUpdate(req.payload._id, updatedUser, { new: true })
+        .then((updatedUser) => {
+
+            const { _id, email, username, avatar } = updatedUser;
+
+            const payload = { _id, email, username, avatar }
+
+            const authToken = jwt.sign(
+                payload,
+                process.env.TOKEN_SECRET,
+                { algorithm: 'HS256', expiresIn: "6h" }
+            )
+
+            res.status(200).json({ authToken: authToken });
+        })
+        .catch(err => {
+            next(err)
+        })
+})
+//
+
 
 router.get('/verify', verifyToken, (req, res, next) => {
 
