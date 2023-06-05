@@ -1,7 +1,6 @@
 const router = require("express").Router()
 const Expense = require('../models/Expense.model')
 const { verifyToken } = require("../middlewares/verifyToken.middleware")
-// const { response } = require("express")
 
 router.get("/getAllExpenses", (req, res, next) => {
   // TODO: DESCOLPLAR CONTROLADORES CON VIDEO
