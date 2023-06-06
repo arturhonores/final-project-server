@@ -1,6 +1,7 @@
 const Expense = require('../models/Expense.model')
 
 const getAllExpenses = (req, res, next) => {
+
     Expense
         .find()
         .select({ description: 1, amount: 1, owner: 1, date: 1, category: 1 })
@@ -10,7 +11,8 @@ const getAllExpenses = (req, res, next) => {
 }
 
 const getExpense = (req, res, next) => {
-    const expenseId = req.params.id
+
+    const { id: expenseId } = req.params
 
     Expense
         .findById(expenseId)
@@ -21,7 +23,7 @@ const getExpense = (req, res, next) => {
 
 const getCategory = (req, res, next) => {
 
-    const category = req.params.category
+    const { category } = req.params
 
     Expense
         .find({ category: category })
@@ -31,7 +33,8 @@ const getCategory = (req, res, next) => {
 }
 
 const deleteExpense = (req, res, next) => {
-    const expenseId = req.params.id
+
+    const { id: expenseId } = req.params
 
     Expense
         .findByIdAndDelete(expenseId)
@@ -40,12 +43,12 @@ const deleteExpense = (req, res, next) => {
 }
 
 const editExpense = (req, res, next) => {
+
     const expenseId = req.params.id
     const { description, amount, category, date } = req.body
 
     Expense
         .findByIdAndUpdate(expenseId, { description, amount, category, date }, { new: true })
-        // El parámetro { new: true } es para que mongoose devuelva el documento actualizado. Por defecto, devuelve el documento original antes de la actualización.
         .then(response => res.json(response))
         .catch(err => next(err))
 }
