@@ -32,6 +32,10 @@ const userSchema = new Schema(
       enum: ['USER', 'ADMIN'],
       default: 'USER',
     },
+    limit: {
+      type: Number,
+      default: 0
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
@@ -50,8 +54,8 @@ userSchema.pre('save', function (next) {
 })
 
 userSchema.methods.signToken = function () {
-  const { _id, username, email, avatar } = this
-  const payload = { _id, username, email, avatar }
+  const { _id, username, email, avatar, limit } = this
+  const payload = { _id, username, email, avatar, limit }
 
   const authToken = jwt.sign(
     payload,
