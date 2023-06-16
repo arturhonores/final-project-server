@@ -4,16 +4,16 @@ const expenseSchema = new Schema(
   {
     date: {
       type: Date,
-      required: [true, 'Date is required.'],
+      required: [true, 'Selecciona una fecha'],
     },
     description: {
       type: String,
       trim: true,
-      required: [true, 'description is required.'],
+      required: [true, 'Escribe una descripción'],
     },
     amount: {
       type: Number,
-      required: [true, 'amount is required.'],
+      required: [true, 'Ingresa el importe del gasto'],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -22,12 +22,8 @@ const expenseSchema = new Schema(
     category: {
       type: String,
       enum: ["Alimentación", "Cuentas y pagos", "Hogar", "Transporte", "Ropa", "Salud y Belleza", "Diversión", "Otros gastos"],
-      required: [true, 'category is required.'],
+      required: [true, 'Elige una categoría'],
     }
-    // account: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Account',
-    // required: [true, 'account is required.'],
   },
   {
     timestamps: true
