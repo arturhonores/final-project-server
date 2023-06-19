@@ -6,7 +6,7 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, 'Email is required.'],
+      required: [true, 'Se requiere un correo'],
       unique: true,
       lowercase: true,
       trim: true
@@ -14,14 +14,16 @@ const userSchema = new Schema(
     password: {
       type: String,
       trim: true,
-      required: true,
-      minLength: [2, 'Password must have at least 2 characters']
+      required: [true, 'Escribe una contraseña'],
+      minLength: [6, 'La contraseña debe tener al menos 6 caracteres'],
+      match: [/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{6,}$/, 'La contraseña debe tener al menos una mayúscula, una minúscula, un número y debe tener al menos 6 caracteres']
     },
     username: {
       type: String,
       trim: true,
-      required: [true, 'Username is required'],
-      minLength: [3, 'Username must have at least 3 characters']
+      required: [true, 'Se requiere un nombre'],
+      minLength: [3, 'El nombre debe tener al menos 3 caracteres'],
+      maxLength: [10, 'El nombre no debe tener más de 10 caracteres']
     },
     avatar: {
       type: String,

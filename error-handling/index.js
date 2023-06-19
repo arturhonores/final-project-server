@@ -7,8 +7,9 @@ module.exports = (app) => {
 
     console.error("ERROR", req.method, req.path, err);
 
+    //el error 11000 no lo maneja mongoose
     if (err.code && err.code === 11000) {
-      res.status(409).json({ errorMessages: ['El registro ya se encuentra en la base de datos'] })
+      res.status(409).json({ errorMessages: ['El correo electrónico ya existe'] })
     }
 
     if (err.name === 'ValidationError') {
