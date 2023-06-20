@@ -25,7 +25,7 @@ router.post('/iniciar-sesion', (req, res, next) => {
     const { email, password } = req.body;
 
     if (email === '' || password === '') {
-        res.status(400).json({ message: "Provide email and password." });
+        res.status(400).json({ message: "Ingresa un correo y contraseña" });
         return;
     }
 
@@ -34,7 +34,7 @@ router.post('/iniciar-sesion', (req, res, next) => {
         .then((foundUser) => {
 
             if (!foundUser) {
-                res.status(401).json({ message: "User not found." })
+                res.status(401).json({ message: "Usuario no encontrado" })
                 return;
             }
 
@@ -43,7 +43,7 @@ router.post('/iniciar-sesion', (req, res, next) => {
                 res.status(200).json({ authToken })
             }
             else {
-                res.status(401).json({ message: "Unable to authenticate the user" });
+                res.status(401).json({ message: "Contraseña Incorrecta" });
             }
 
         })
